@@ -1,14 +1,16 @@
-import { Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import QRScanner from "./components/scanner";
-import { RestaurantMenu } from "./pages";
+import RestaurantMenu from "./pages";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<QRScanner />} />
-      <Route path="/menu" element={<RestaurantMenu />} />
-    </Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<QRScanner />} />
+        <Route path="/menu" element={<RestaurantMenu />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
