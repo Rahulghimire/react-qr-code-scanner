@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Html5QrcodeScanner, Html5QrcodeScanType } from "html5-qrcode";
+import QRCodeGenerator from "../generator";
 
 const QRScanner: React.FC = () => {
   const [menuUrl, setMenuUrl] = useState<string>("");
@@ -68,6 +69,7 @@ const QRScanner: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-purple-200 p-4">
+      <QRCodeGenerator url={"https://www.youtube.com/"} />
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
         <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
           Restaurant Menu QR Scanner
