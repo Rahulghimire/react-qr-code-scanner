@@ -1,10 +1,11 @@
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
   clearNotification,
   removeFromCart,
+  clearCart,
 } from "../../redux/features/cartSlice";
-import { useEffect } from "react";
 
 const RestaurantMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,21 @@ const RestaurantMenu: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [notification, dispatch]);
+
+  const total = cart.reduce(
+    (sum: number, item: { price: number; quantity: number }) =>
+      sum + item.price * item.quantity,
+    0
+  );
+
+  const handleCheckout = () => {
+    if (cart.length === 0) {
+      alert("Cart is empty!");
+      return;
+    }
+    alert(`Order placed! Total: Rs. ${total.toFixed(2)}`);
+    dispatch(clearCart());
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 font-sans">
@@ -62,7 +78,7 @@ const RestaurantMenu: React.FC = () => {
       </main>
 
       {/* Cart Display */}
-      <div className="fixed bottom-4 right-4 bg-white p-4 rounded shadow max-w-xs w-full">
+      <div className="fixed bottom-24 right-4 bg-white p-4 rounded shadow max-w-xs w-full">
         <h3 className="font-semibold mb-2">Your Cart</h3>
         {cart.length === 0 ? (
           <p>Cart is empty</p>
@@ -83,6 +99,19 @@ const RestaurantMenu: React.FC = () => {
               </button>
             </div>
           ))
+        )}
+        {cart.length > 0 && (
+          <div className="mt-4 text-right font-semibold">
+            Total: Rs. {total.toFixed(2)}
+          </div>
+        )}
+        {cart.length > 0 && (
+          <button
+            className="mt-3 w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+            onClick={handleCheckout}
+          >
+            Checkout
+          </button>
         )}
       </div>
 

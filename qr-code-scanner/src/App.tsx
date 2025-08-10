@@ -6,6 +6,7 @@ import QRCodeDesigner from "./pages/qr-code-generator";
 import { Provider } from "react-redux";
 import { persistor, store } from "./redux/app/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { Order } from "./pages/order";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               path="/custom-qr-code-generator"
               element={<QRCodeDesigner />}
             />
+            <Route path="/order" element={<Order />} />
           </Routes>
         </BrowserRouter>
       </PersistGate>
