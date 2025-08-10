@@ -1,63 +1,4 @@
 const RestaurantMenu: React.FC = () => {
-  const menuCategories = [
-    {
-      name: "Appetizers",
-      items: [
-        {
-          name: "Bruschetta",
-          price: 8.99,
-          description:
-            "Toasted bread topped with fresh tomatoes, basil, and balsamic glaze",
-        },
-        {
-          name: "Calamari",
-          price: 12.99,
-          description: "Crispy fried squid served with marinara sauce",
-        },
-        {
-          name: "Caprese Salad",
-          price: 9.99,
-          description: "Fresh mozzarella, tomatoes, basil, and olive oil",
-        },
-      ],
-    },
-    {
-      name: "Main Courses",
-      items: [
-        {
-          name: "Grilled Salmon",
-          price: 22.99,
-          description: "Fresh salmon fillet with lemon herb sauce",
-        },
-        {
-          name: "Filet Mignon",
-          price: 29.99,
-          description: "8oz premium beef with red wine reduction",
-        },
-        {
-          name: "Vegetarian Pasta",
-          price: 16.99,
-          description: "Penne with seasonal vegetables in pesto sauce",
-        },
-      ],
-    },
-    {
-      name: "Desserts",
-      items: [
-        {
-          name: "Tiramisu",
-          price: 7.99,
-          description: "Classic Italian dessert with coffee and mascarpone",
-        },
-        {
-          name: "Cheesecake",
-          price: 6.99,
-          description: "New York style cheesecake with berry compote",
-        },
-      ],
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-gray-100 font-sans">
       <header className="bg-gradient-to-r from-rose-600 to-rose-800 text-white py-8 text-center">
@@ -102,3 +43,62 @@ const RestaurantMenu: React.FC = () => {
 };
 
 export default RestaurantMenu;
+
+const menuCategories = [
+  {
+    name: "Appetizers",
+    items: [
+      {
+        name: "Bruschetta",
+        price: 8.99,
+        description:
+          "Toasted bread topped with fresh tomatoes, basil, and balsamic glaze",
+      },
+      {
+        name: "Calamari",
+        price: 12.99,
+        description: "Crispy fried squid served with marinara sauce",
+      },
+      {
+        name: "Caprese Salad",
+        price: 9.99,
+        description: "Fresh mozzarella, tomatoes, basil, and olive oil",
+      },
+    ],
+  },
+  {
+    name: "Main Courses",
+    items: [
+      {
+        name: "Grilled Salmon",
+        price: 22.99,
+        description: "Fresh salmon fillet with lemon herb sauce",
+      },
+      {
+        name: "Filet Mignon",
+        price: 29.99,
+        description: "8oz premium beef with red wine reduction",
+      },
+      {
+        name: "Vegetarian Pasta",
+        price: 16.99,
+        description: "Penne with seasonal vegetables in pesto sauce",
+      },
+    ],
+  },
+  {
+    name: "Desserts",
+    items: [
+      {
+        name: "Tiramisu",
+        price: 7.99,
+        description: "Classic Italian dessert with coffee and mascarpone",
+      },
+      {
+        name: "Cheesecake",
+        price: 6.99,
+        description: "New York style cheesecake with berry compote",
+      },
+    ],
+  },
+];

@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import QRScanner from "./components/scanner";
 import RestaurantMenu from "./pages";
+import { QRCodeGeneratorPage } from "./pages/qr-code-generator";
 
 function App() {
   return (
@@ -9,6 +10,10 @@ function App() {
       <Routes>
         <Route path="/" element={<QRScanner />} />
         <Route path="/menu" element={<RestaurantMenu />} />
+        <Route
+          path="/custom-qr-code-generator"
+          element={<QRCodeGeneratorPage />}
+        />
       </Routes>
     </BrowserRouter>
   );
