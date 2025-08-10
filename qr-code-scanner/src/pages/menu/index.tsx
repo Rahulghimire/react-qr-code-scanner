@@ -76,7 +76,7 @@ const RestaurantMenu: React.FC = () => {
                 {item.name} x {item.quantity}
               </div>
               <button
-                className="text-red-500 hover:text-red-700"
+                className="text-red-500 hover:text-red-700 cursor-pointer"
                 onClick={() => dispatch(removeFromCart(item.name))}
               >
                 Remove
