@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { io } from "socket.io-client";
 
 type CartItem = {
   name: string;
@@ -13,10 +14,33 @@ export const Order: React.FC = () => {
   const cart = useSelector((state: any) => state.cart.items) as CartItem[];
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const [notification, setNotification] = useState(null);
+
+  useEffect(() => {
+    const socket = io("http://localhost:5173");
+
+    socket.on("connect", () => {
+      console.log("Connected to Socket.IO server");
+    });
+
+    socket.on("orderNotification", (message) => {
+      setNotification(message);
+      setTimeout(() => setNotification(null), 5000);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow mt-8">
       <h1 className="text-2xl font-bold mb-6">Your Order</h1>
+      {notification && (
+        <div className="mb-4 p-4 bg-green-100 text-green-800 rounded">
+          {notification}
+        </div>
+      )}
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -51,7 +75,15 @@ export const Order: React.FC = () => {
             Total: ${total.toFixed(2)}
           </div>
           <button
-            onClick={() => alert("Order placed!")}
+            onClick={() => {
+              alert("Order placed!");
+              const socket = io("http://localhost:5173");
+              socket.emit("placeOrder", {
+                items: cart,
+                total: total.toFixed(2),
+                timestamp: new Date().toISOString(),
+              });
+            }}
             className="bg-rose-600 text-white px-6 py-3 rounded hover:bg-rose-700 transition"
           >
             Place Order
