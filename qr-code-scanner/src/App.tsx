@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import QRScanner from "./components/scanner";
-import RestaurantMenu from "./pages";
+import RestaurantMenu from "./pages/menu";
 import QRCodeDesigner from "./pages/qr-code-generator";
 
 function App() {

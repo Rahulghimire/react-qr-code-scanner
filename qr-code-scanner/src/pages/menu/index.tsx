@@ -22,10 +22,10 @@ const RestaurantMenu: React.FC = () => {
                     {item.name}
                   </h3>
                   <p className="text-rose-600 font-medium mb-2">
-                    ${item.price.toFixed(2)}
+                    Rs. {item.price.toFixed(2)}
                   </p>
                   <p className="text-gray-600">{item.description}</p>
-                  <button className="mt-4 bg-rose-600 text-white px-4 py-2 rounded hover:bg-rose-700 transition-colors duration-300">
+                  <button className="mt-4 bg-rose-600 cursor-pointer text-white px-4 py-2 rounded hover:bg-rose-700 transition-colors duration-300">
                     Order Now
                   </button>
                 </div>
