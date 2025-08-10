@@ -1,4 +1,23 @@
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToCart,
+  clearNotification,
+  removeFromCart,
+} from "../../redux/features/cartSlice";
+import { useEffect } from "react";
+
 const RestaurantMenu: React.FC = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state: any) => state.cart.items);
+  const notification = useSelector((state: any) => state.cart.notification);
+
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => dispatch(clearNotification()), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [notification, dispatch]);
+
   return (
     <div className="min-h-screen bg-gray-100 font-sans">
       <header className="bg-gradient-to-r from-rose-600 to-rose-800 text-white py-8 text-center">
@@ -25,7 +44,14 @@ const RestaurantMenu: React.FC = () => {
                     Rs. {item.price.toFixed(2)}
                   </p>
                   <p className="text-gray-600">{item.description}</p>
-                  <button className="mt-4 bg-rose-600 cursor-pointer text-white px-4 py-2 rounded hover:bg-rose-700 transition-colors duration-300">
+                  <button
+                    className="mt-4 bg-rose-600 cursor-pointer text-white px-4 py-2 rounded hover:bg-rose-700 transition-colors duration-300"
+                    onClick={() =>
+                      dispatch(
+                        addToCart({ name: item.name, price: item.price })
+                      )
+                    }
+                  >
                     Order Now
                   </button>
                 </div>
@@ -34,6 +60,38 @@ const RestaurantMenu: React.FC = () => {
           </section>
         ))}
       </main>
+
+      {/* Cart Display */}
+      <div className="fixed bottom-4 right-4 bg-white p-4 rounded shadow max-w-xs w-full">
+        <h3 className="font-semibold mb-2">Your Cart</h3>
+        {cart.length === 0 ? (
+          <p>Cart is empty</p>
+        ) : (
+          cart.map((item: any) => (
+            <div
+              key={item.name}
+              className="flex justify-between items-center mb-1"
+            >
+              <div>
+                {item.name} x {item.quantity}
+              </div>
+              <button
+                className="text-red-500 hover:text-red-700"
+                onClick={() => dispatch(removeFromCart(item.name))}
+              >
+                Remove
+              </button>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Notification */}
+      {notification && (
+        <div className="fixed top-4 right-4 bg-rose-600 text-white px-4 py-2 rounded shadow">
+          {notification}
+        </div>
+      )}
 
       <footer className="bg-rose-800 text-white text-center py-4">
         <p>&copy; 2025 Gourmet Bistro. All rights reserved.</p>
